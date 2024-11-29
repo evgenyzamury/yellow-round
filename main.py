@@ -5,20 +5,22 @@ from PyQt6.QtCore import Qt, QRectF, QPoint
 from PyQt6.QtWidgets import QWidget, QApplication, QMainWindow
 from PyQt6.QtGui import QPainter, QBrush, QColor
 from PyQt6 import uic
+from UI import Ui_MainWindow
 
 
-class Suprematism(QMainWindow):
+class Suprematism(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
-        self.x = 350
+        self.setupUi(self)
+        self.x = 370
         self.y = 150
         self.pushButton.clicked.connect(lambda x: self.update())
 
     def paintEvent(self, event):
         self.side = random.randint(20, 100)
         painter = QPainter(self)
-        brush = QBrush(QColor(255, 255, 0))
+        r, g, b = random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
+        brush = QBrush(QColor(r, g, b))
         painter.setBrush(brush)
         painter.drawEllipse(self.x - self.side, self.y - self.side, self.side * 2, self.side * 2)
 
